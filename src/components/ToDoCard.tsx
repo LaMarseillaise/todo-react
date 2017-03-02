@@ -1,13 +1,16 @@
 import * as React from "react";
 
-export interface ToDoCardProps {
-  title: String;
-  description: String;
+interface ToDoCardProps {
+  id: number;
+  title: string;
+  description: string;
   completed: boolean;
 }
 
-export class ToDoCard extends React.Component<ToDoCardProps, undefined> {
-  render() {
+interface ToDoCardState {}
+
+export class ToDoCard extends React.Component<ToDoCardProps, ToDoCardState> {
+  render(): JSX.Element {
     return (
       <div>
         <h3>{ this.props.title }</h3>
