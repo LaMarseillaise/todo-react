@@ -23,6 +23,7 @@ export class ToDoApp extends React.Component<ToDoAppProps, ToDoAppState> {
     };
 
     this.addToDoItem = this.addToDoItem.bind(this);
+    this.toggleToDoItem = this.toggleToDoItem.bind(this);
   }
 
   addToDoItem(title: string, description: string): void {
@@ -38,12 +39,27 @@ export class ToDoApp extends React.Component<ToDoAppProps, ToDoAppState> {
     });
   };
 
+  toggleToDoItem(id: number): void {
+    let newToDoItems = this.state.toDoItems.map((toDoItem: ToDoItem) => {
+      let updated = {
+        id: toDoItem.id,
+        completed: toDoItem.completed,
+        title: toDoItem.title,
+        description: toDoItem.description
+      };
+      if (toDoItem.id === id) { updated.completed = !toDoItem.completed; }
+      return updated as ToDoItem;
+    });
+
+    this.setState({ toDoItems: newToDoItems });
+  }
+
   render(): JSX.Element {
     return (
       <div>
         {this.state.toDoItems.map((toDoItem: any) => {
           return (
-            <ToDoCard key={toDoItem.id} {...toDoItem} />
+            <ToDoCard key={toDoItem.id} {...toDoItem} toggleComplete={this.toggleToDoItem} />
           );
         })}
         <ToDoForm createToDoItem={this.addToDoItem} />
