@@ -57,11 +57,16 @@ export class ToDoApp extends React.Component<ToDoAppProps, ToDoAppState> {
   render(): JSX.Element {
     return (
       <div>
-        {this.state.toDoItems.map((toDoItem: any) => {
-          return (
-            <ToDoCard key={toDoItem.id} {...toDoItem} toggleComplete={this.toggleToDoItem} />
-          );
-        })}
+        {this.state.toDoItems.slice()
+          .sort((a: ToDoItem, b: ToDoItem): number => {
+            return (a.completed ? 1 : 0) - (b.completed ? 1 : 0);
+          })
+          .map((toDoItem: ToDoItem) => {
+            return (
+              <ToDoCard key={toDoItem.id} {...toDoItem} toggleComplete={this.toggleToDoItem} />
+            );
+          })
+        }
         <ToDoForm createToDoItem={this.addToDoItem} />
       </div>
     );
