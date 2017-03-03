@@ -65,19 +65,22 @@ export class ToDoApp extends React.Component<ToDoAppProps, ToDoAppState> {
 
   render(): JSX.Element {
     return (
-      <div>
-        {this.state.toDoItems.slice()
-          .sort((a: ToDoItem, b: ToDoItem): number => {
-            return (a.completed ? 1 : 0) - (b.completed ? 1 : 0);
-          })
-          .map((toDoItem: ToDoItem) => {
-            return (
-              <ToDoCard key={toDoItem.id} {...toDoItem} remove={this.removeToDoItem} toggleComplete={this.toggleToDoItem} />
-            );
-          })
-        }
+      <main className="container">
+        <h1 className="text-center">Agenda</h1>
+        <ul className="list-group">
+          {this.state.toDoItems.slice()
+            .sort((a: ToDoItem, b: ToDoItem): number => {
+              return (a.completed ? 1 : 0) - (b.completed ? 1 : 0);
+            })
+            .map((toDoItem: ToDoItem) => {
+              return (
+                <ToDoCard key={toDoItem.id} {...toDoItem} remove={this.removeToDoItem} toggleComplete={this.toggleToDoItem} />
+              );
+            })
+          }
+        </ul>
         <ToDoForm createToDoItem={this.addToDoItem} />
-      </div>
+      </main>
     );
   }
 }

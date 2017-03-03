@@ -36,19 +36,17 @@ export class ToDoForm extends React.Component<ToDoFormProps, ToDoFormState> {
   render(): JSX.Element {
     return (
       <form onSubmit={this.submitForm}>
-        <div>
-          <h3>New Item</h3>
-        </div>
-        <div>
+        <h3>Add New Item</h3>
+        <div className="form-group">
           <label htmlFor="title">Title: </label>
-          <input onChange={this.handleTitleChange.bind(this)} type="text" value={this.state.title} id="title" />
+          <input onChange={this.handleTitleChange.bind(this)} type="text" value={this.state.title} id="title" className="form-control" />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="description">Description: </label>
-          <input onChange={this.handleDescriptionChange.bind(this)} type="text" value={this.state.description} id="description" />
+          <input onChange={this.handleDescriptionChange.bind(this)} type="text" value={this.state.description} id="description" className="form-control" />
         </div>
-        <div>
-          <button type="submit">Add</button>
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary">Add</button>
         </div>
       </form>
     );

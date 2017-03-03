@@ -34,25 +34,20 @@ export class ToDoCard extends React.Component<ToDoCardProps, ToDoCardState> {
   }
 
   render(): JSX.Element {
-    let divStyle: { color?: string } = {};
+    let itemClass: string;
 
     if (this.props.completed) {
-      divStyle.color = "blue";
+      itemClass = "list-group-item list-group-item-success";
     } else {
-      divStyle.color = "red";
+      itemClass = "list-group-item list-group-item-warning";
     }
 
     return (
-      <div style={divStyle}>
-        <h3>{ this.props.title }</h3>
-        <p>
-          { this.props.description }
-        </p>
-        <input type="checkbox" onChange={this.completeToDo} checked={this.state.completed} />
-        <button onClick={this.remove} style={ { backgroundColor: "red" } }>
-          X
-        </button>
-      </div>
+      <li className={itemClass}>
+        <input type="checkbox" onChange={this.completeToDo} checked={this.state.completed} className="pull-left" />
+        <button onClick={this.remove} className="btn btn-danger btn-xs pull-right">X</button>
+        &nbsp;{ this.props.title }: { this.props.description }
+      </li>
     );
   }
 }
