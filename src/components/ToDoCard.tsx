@@ -6,6 +6,7 @@ interface ToDoCardProps {
   description: string;
   completed: boolean;
   toggleComplete: Function;
+  remove: Function;
 }
 
 interface ToDoCardState {
@@ -21,10 +22,15 @@ export class ToDoCard extends React.Component<ToDoCardProps, ToDoCardState> {
     };
 
     this.completeToDo = this.completeToDo.bind(this);
+    this.remove = this.remove.bind(this);
   }
 
   completeToDo(): void {
     this.props.toggleComplete(this.props.id);
+  }
+
+  remove(): void {
+    this.props.remove(this.props.id);
   }
 
   render(): JSX.Element {
@@ -43,6 +49,9 @@ export class ToDoCard extends React.Component<ToDoCardProps, ToDoCardState> {
           { this.props.description }
         </p>
         <input type="checkbox" onChange={this.completeToDo} checked={this.state.completed} />
+        <button onClick={this.remove} style={ { backgroundColor: "red" } }>
+          X
+        </button>
       </div>
     );
   }

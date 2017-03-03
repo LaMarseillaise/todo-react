@@ -23,6 +23,7 @@ export class ToDoApp extends React.Component<ToDoAppProps, ToDoAppState> {
     };
 
     this.addToDoItem = this.addToDoItem.bind(this);
+    this.removeToDoItem = this.removeToDoItem.bind(this);
     this.toggleToDoItem = this.toggleToDoItem.bind(this);
   }
 
@@ -38,6 +39,14 @@ export class ToDoApp extends React.Component<ToDoAppProps, ToDoAppState> {
       nextId: this.state.nextId + 1
     });
   };
+
+  removeToDoItem(id: number): void {
+    let updatedToDoList = this.state.toDoItems.filter((toDoItem: ToDoItem): boolean => {
+      return toDoItem.id !== id;
+    });
+
+    this.setState({ toDoItems: updatedToDoList });
+  }
 
   toggleToDoItem(id: number): void {
     let newToDoItems = this.state.toDoItems.map((toDoItem: ToDoItem) => {
@@ -63,7 +72,7 @@ export class ToDoApp extends React.Component<ToDoAppProps, ToDoAppState> {
           })
           .map((toDoItem: ToDoItem) => {
             return (
-              <ToDoCard key={toDoItem.id} {...toDoItem} toggleComplete={this.toggleToDoItem} />
+              <ToDoCard key={toDoItem.id} {...toDoItem} remove={this.removeToDoItem} toggleComplete={this.toggleToDoItem} />
             );
           })
         }
